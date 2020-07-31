@@ -11,30 +11,43 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-// the function that will be called by the unit test below
-// should return "It's a tie" if hand1 and hand2 tie
-//should return "hand one wins" if hand1 is the winner
-// should return "hand two wins"vif hand2 is the winner
+
+
+
+
 const rockPaperScissors = (hand1, hand2) => {
+const tieGame = "It's a tie!";
+const hand1Win = "Hand one wins!";
+const hand2Win = "Hand two wins!";
+const invalidMessage = "You have made an invalid entry, please try again";
+
   if (hand1.toLowerCase().trim() === hand2.toLowerCase().trim()){
-    return "It's a tie!";
-  } 
+    return tieGame;
+  }
   else if (hand1.toLowerCase().trim() === 'rock' && hand2.toLowerCase().trim() === 'paper'){
-    return "Hand two wins!";
+    return hand2Win;
   } 
   else if (hand1.toLowerCase().trim() === 'paper' && hand2.toLowerCase().trim() === 'scissors'){
-    return "Hand two wins!";
+    return hand2Win;
   } 
   else if (hand1.toLowerCase().trim() === 'scissors' && hand2.toLowerCase().trim() === 'rock'){
-    return "Hand two wins!";
+    return hand2Win;
   } 
-  else {
-    return "Hand one wins!";
+  else if (hand1.toLowerCase().trim() === 'rock' && hand2.toLowerCase().trim() === 'scissors'){
+    return hand1Win;
   }
+  else if (hand1.toLowerCase().trim() === 'paper' && hand2.toLowerCase().trim() === 'rock'){
+    return hand1Win;
+  }
+  else if (hand1.toLowerCase().trim() === 'scissors' && hand2.toLowerCase().trim() === 'paper'){
+    return hand1Win;
+  }
+  else {
+    return invalidMessage;
+  }
+  
 
-  // Write code here
-  // Use the unit test to see what is expected
-
+//I found out how to make it work if there was an invalid entry, however if the same invalid entry is entered twice it will count as a tie =(,,,,
 }
 
 // the first function called in the program to get an input from the user
