@@ -54,4 +54,3 @@ if(handsome || rich){
 if(!handsome && !rich){
    console.log("They have no money and they arent good looking!");
 }
-// Go back and make this a function!!!! 
