@@ -16,6 +16,21 @@ const rl = readline.createInterface({
 //should return "hand one wins" if hand1 is the winner
 // should return "hand two wins"vif hand2 is the winner
 const rockPaperScissors = (hand1, hand2) => {
+  if (hand1.toLowerCase().trim() === hand2.toLowerCase().trim()){
+    return "It's a tie!";
+  } 
+  else if (hand1.toLowerCase().trim() === 'rock' && hand2.toLowerCase().trim() === 'paper'){
+    return "Hand two wins!";
+  } 
+  else if (hand1.toLowerCase().trim() === 'paper' && hand2.toLowerCase().trim() === 'scissors'){
+    return "Hand two wins!";
+  } 
+  else if (hand1.toLowerCase().trim() === 'scissors' && hand2.toLowerCase().trim() === 'rock'){
+    return "Hand two wins!";
+  } 
+  else {
+    return "Hand one wins!";
+  }
 
   // Write code here
   // Use the unit test to see what is expected
