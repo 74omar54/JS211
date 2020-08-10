@@ -16,28 +16,26 @@ let indexOfVowel = (word) => {
   for ( i = 0; i < letters.length; i++){
       let letter = letters[i];
       let hasVowel = 'aeiou'.includes(letter);
-      
-      //might delete this step since the purpose of this function is to find the vowel position.
-      //This is the real purpose of the program! 
       if(hasVowel){
          
           return i;
       }
   }
-  //if we get to this point then the word does not contain a vowel! 
   return -1;
 }
-//either write a function in here or decide to do the last step inside of the PL function
-//either way it has to be done correctly!!!! GOODLUCK
+
 
 const pigLatin = (word) => {
    let indexedWord = indexOfVowel(word);
+   //checks to see if the first letter is a vowel.
    if (indexedWord == 0){
      return word + 'yay';
    }
+   // checks to see if the word doesnt contain a vowel
    if (indexedWord == -1){
      return word + 'ay';
    }
+   // when there is a vowel but it isnt the first letter in the word.
    if (indexedWord > 0){
      let newWord = word.slice(indexedWord) + word.slice(0, indexedWord) + 'ay';
      return newWord;
@@ -45,7 +43,7 @@ const pigLatin = (word) => {
 
    }
   
-  // Your code here
+
 
 
 
