@@ -8,40 +8,45 @@ const readline = require('readline');
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
-});
+})
+
 let indexOfVowel = (word) => {
-  let letters = word.split('');
+  let letters = word.toLowerCase().trim().split('');
   let i = 0;
   for ( i = 0; i < letters.length; i++){
       let letter = letters[i];
-      // check if the letter is a vowel
-      // if the letter is a vowel return the position (i);
       let hasVowel = 'aeiou'.includes(letter);
-      let firstLetterVowel = 'aeiou'.includes(letters[0]);
-      if(firstLetterVowel){
-          return word + 'yay';
-      }
+      
+      //might delete this step since the purpose of this function is to find the vowel position.
+      //This is the real purpose of the program! 
       if(hasVowel){
-          let newString = word.substring(letter);
-          //this is where you need to find a way to split and rearange the word
+         
           return i;
       }
   }
-  //if we get to this point
-  //that means that we finished going through all the letters
-  //and if we had encoutnered a vowel in the loop, we would have returned 
-  //so this means the word has no vowel.
+  //if we get to this point then the word does not contain a vowel! 
   return -1;
 }
-
+//either write a function in here or decide to do the last step inside of the PL function
+//either way it has to be done correctly!!!! GOODLUCK
 
 const pigLatin = (word) => {
    let indexedWord = indexOfVowel(word);
-   return indexedWord
+   if (indexedWord == 0){
+     return word + 'yay';
+   }
+   if (indexedWord == -1){
+     return word + 'ay';
+   }
+   if (indexedWord > 0){
+     let newWord = word.slice(indexedWord) + word.slice(0, indexedWord) + 'ay';
+     return newWord;
+   }
+
+   }
   
   // Your code here
 
-}
 
 
 // the first function called in the program to get an input from the user
