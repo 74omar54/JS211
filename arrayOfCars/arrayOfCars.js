@@ -40,9 +40,7 @@ let numbers = [23, 45, 0 , 2, 8, 44, 100, 1, 3, 91, 34];
 
 let addTwoMore = (array) =>{
     
-for (let i = 0; i < array.length; i++){
-    console.log(array[i] + 2);
-    }
+""
 
 }
 numbers.forEach(function(number){
