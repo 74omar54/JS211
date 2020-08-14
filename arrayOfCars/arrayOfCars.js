@@ -45,6 +45,11 @@ for (let i = 0; i < array.length; i++){
     }
 
 }
-console.log(addTwoMore([2, 45, 100, 46, 412, 1]));
+numbers.forEach(function(number){
+    let myNewNumber = number + 2;
+    console.log(myNewNumber)
+});
+
+
 
 
