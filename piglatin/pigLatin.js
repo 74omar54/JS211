@@ -1,6 +1,18 @@
 'use strict';
 
-
+// Here we start by making a variable called translator and 
+//and connecting it to the button in the HTML FILE
+//next I give the translator an event to listen for (click)
+//Then I make a var waitingToTranslate in order to get the 
+//input from the input box
+//I wrote out a console.log to make sure it was actually grabbing my input
+//Then i created a list item called printWord
+//that is going to print out my translatedword
+//I made a UL in the HTML with the id "theResult"
+//The list item that is about to appear i gave it the piglatin function 
+//and i told it to translate the word that is waiting to get translated
+//I then put my newly translated word inside that UL i made earlier
+//lastly I set my translatorBox value to a string so it would expect the input of a string.
 let translator = document.getElementById("translator");
 translator.addEventListener('click',function (){
   let translatorBox = document.getElementById("translatorBox");
