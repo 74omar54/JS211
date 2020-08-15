@@ -85,6 +85,28 @@ if (typeof describe === 'function') {
       assert.equal(rockPaperScissors('rock ', 'sCiSsOrs'), "Hand one wins!");
     });
   });
+
+ // I will ad my own unit test named RPS UNIT TEST HW
+ //I will first check to see if there will be an invalid message when
+ //somebody has an invalid input
+ //I will then test to see what happens when you enter the same mispelled word
+ //twice into the input. my guess is that it will result in a tie
+ //I would like to find a way to not have it end in a tie! 
+
+  describe('RPS UNIT TEST HW', function(){
+    it ("should check if there is an invalid message", function(){
+      assert.equal(rockPaperScissors('rack', 'rick'), "You have made an invalid entry, please try again");
+      assert.equal(rockPaperScissors('posper', 'poper'), "You have made an invalid entry, please try again");
+      assert.equal(rockPaperScissors('siser', 'sisser'), "You have made an invalid entry, please try again");
+    });
+   it ("should check to see if the same mispelled words would equal a tie", function(){
+     assert.equal(rockPaperScissors('roc','roc'), "It's a tie!");
+     assert.equal(rockPaperScissors('papper', 'papper'), "It's a tie!");
+     assert.equal(rockPaperScissors('sizer', 'sizer'), "It's a tie!");
+   })
+
+      
+  })
 } else {
 
   // always returns ask the user for another input
