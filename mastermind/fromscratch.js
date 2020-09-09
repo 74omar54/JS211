@@ -43,3 +43,15 @@ let scratchMap = (array, callback) => {
     }
 
 }
+
+function scratchFind(array, callback) {
+    for(let i  = 0; i < array.length; i++){
+      let element = array[i]
+      let inOrOut = callback(element, i)
+      if(inOrOut == true){
+        return element
+      }
+    }
+    return undefined
+  }
+  
