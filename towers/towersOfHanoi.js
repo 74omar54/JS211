@@ -22,13 +22,13 @@ would look cleaner.
   let c = stacks.c;
   let errorMessage = `You have made an invalid entry or move please try again`;
   let winningMessage = `Congrats!! The Towers of Hanoi have been defeated the game is now over....`;
-  
+    
  
 
 const printStacks = () => {
   console.log("a: " + a);
   console.log("b: " + b);
-  console.log("c: " + c);
+  console.log("c: " + c);  
 }
 /*
 I moved the stacks variable into another file and messed around with it untill I found
@@ -41,40 +41,10 @@ and push it onto the endStack NOTE: this does not check to see if a move is lega
 */
 
 const movePiece = (startStack, endStack) => {
-  let firstMove = startStack.toLowerCase();
-  let secondMove = endStack.toLowerCase();
-
-  if (firstMove == 'a' && secondMove == 'b'){
-    b.push(a.pop());
-    return stacks;
-  }
-  if (firstMove == 'a' && secondMove == 'c'){
-    c.push(a.pop());
-    return stacks;
-
-  }
-  if (firstMove == 'b' && secondMove == 'a'){
-    a.push(b.pop());
-    return stacks;
-
-  }
-  if (firstMove == 'b' && secondMove == 'c'){
-    c.push(b.pop());
-    return stacks;
-
-  }
-  if (firstMove == 'c' && secondMove == 'a'){
-    a.push(c.pop());
-    return stacks;
-
-  }
-  if (firstMove == 'c' && secondMove == 'b'){
-    b.push(c.pop());
-    return stacks;
-
-  }
   
-
+  stacks[endStack].push(stacks[startStack].pop());
+  return stacks;
+  
 
 }
 /*
@@ -92,63 +62,34 @@ startStack and endStack, while also considering invalid entries the entire time.
 
 const isLegal = (startStack, endStack) => {
   
-  let lowerStart = startStack.toLowerCase();
-  let lowerEnd = endStack.toLowerCase();
-  let lastIndexOfA = a[a.length -1];
-  let lastIndexOfB = b[b.length -1];
-  let lastIndexOfC = c[c.length -1];
+  let startArray = stacks[startStack];
+  let endArray = stacks[endStack];
 
-  if (lowerStart == lowerEnd){ 
+  if (startArray == endArray){
+    console.log(errorMessage);
     return false;
   }
-  if (lowerStart == 'a' && lowerEnd == 'b'){
-    if (lastIndexOfA > lastIndexOfB){
-      return false;
-    } else {
-      return true;
-    }
+  if (startArray == undefined || endArray == undefined){
+    console.log(errorMessage);
+    return false;
   }
-  if (lowerStart == 'a' && lowerEnd == 'c'){
-    if (lastIndexOfA > lastIndexOfC){
-      return false;
-    } else {
-      return true;
-    }
+  if (startArray.length == 0){
+    console.log(errorMessage);
+    return false;
   }
-  if (lowerStart == 'b' && lowerEnd == 'a'){
-    if (lastIndexOfB > lastIndexOfA){
-      return false;
-    } else {
-      return true;
-    }
-  }
-  if (lowerStart == 'b' && lowerEnd == 'c'){
-    if (lastIndexOfB > lastIndexOfC){
-      return false;
-    } else {
-      return true;
-    }
-  }
-  if (lowerStart == 'c' && lowerEnd == 'a'){
-    if (lastIndexOfC > lastIndexOfA){
-      return false;
-    } else {
-      return true;
-    }
-  }
-  if (lowerStart == 'c' && lowerEnd == 'b'){
-    if (lastIndexOfC > lastIndexOfB){
-      return false;
-    } else {
-      return true;
-    }
-  }
-  else {
+  if (endArray.length == 0){
     return true;
   }
+  let pieceToMove = startArray[startArray.length -1];
+  let tipOfEnd = endArray[endArray.length -1];
+  if (pieceToMove < tipOfEnd){
+    return true;
+  } else {
+    console.log(errorMessage);
+    return false;
+  }
   
-
-}
+};
 /*
 The check for win function was by far the easiest to complete and its actually
 the very first thing I did. The first thing I did was convert my arrays into strings, because
@@ -161,10 +102,11 @@ const checkForWin = () => {
   if (b.join() == ('4,3,2,1') || c.join() == ('4,3,2,1')){
     console.log(winningMessage);
     return true;
-  }
+  };
+  return false;
 
 
-}
+};
 /*
 This is the function that ran the entire game and I knew that all the other functions would end up here
 I thought that the isLegal would have to be first to ensure the move wouldnt be made if it wasnt
@@ -177,10 +119,9 @@ const towersOfHanoi = (startStack, endStack) => {
   if (isLegal(startStack, endStack) == true){
     movePiece(startStack, endStack);
   } else{
-    console.log(errorMessage);
+    checkForWin();
   }
-  checkForWin();
-}
+};
 
 const getPrompt = () => {
   printStacks();
@@ -190,7 +131,7 @@ const getPrompt = () => {
       getPrompt();
     });
   });
-}
+};
 getPrompt();
 
 /*
@@ -213,24 +154,15 @@ if (typeof describe === 'function'){
       assert.equal(movePiece('c', 'b'), stacks);
     });
     it ('should detect a win', () => {
-      towersOfHanoi('a', 'b')
-      towersOfHanoi('a', 'c')
-      towersOfHanoi('b', 'c')
-      towersOfHanoi('a', 'b')
-      towersOfHanoi('c', 'a')
-      towersOfHanoi('c', 'b')
-      towersOfHanoi('a', 'b')
-      towersOfHanoi('a', 'c')
-      towersOfHanoi('b', 'c')
-      towersOfHanoi('b', 'a')
-      towersOfHanoi('c', 'a')
-      towersOfHanoi('b', 'c')
-      towersOfHanoi('a', 'b')
-      towersOfHanoi('a', 'c')
-      towersOfHanoi('b', 'c')
+      stacks = {
+        a: [1],
+        b: [],
+        c: [4,3,2]
+      };
+      assert.equal(checkForWin(), false)
+      movePiece('a','c');
+      console.log(stacks);
       assert.equal(checkForWin(), true)
     });
   });
-} else {
-  getPrompt();
-}
+};
